@@ -1,19 +1,19 @@
 # Wordle Solver
 
-wordleを解けるやつです。
+This is a solver of wordle.
 
-平均約3.9028回の回答で答えを当てることができます。
+It solves with in average 3.9 attemps.
 
-平均情報量が一番大きい単語を毎回選択します。
+The word with the highest entropy is selected each guess.
 
-平均情報量の計算はxclocheさんの以下の記事を参考にしました。
+The calculation of the average information content is based on the following article by xcloche.
 https://xcloche.hateblo.jp/entry/2022/01/24/212558
 
-ソルバーとしては、毎回答ごとに、現在まで得られたヒントを満たすような単語集合の中から、最も平均情報量が高い単語を回答として提出する、貪欲な方法を取っています。
+As a solver, I take a greedy approach, submitting as an answer the word with the highest average information content from the set of words that would satisfy the hints obtained so far for each answer.
 
-なお、Wordleの回答を自動化するものではありません。
+Note that this does not automate Wordle responses.
 
-語彙はWordleから直接抜き取りましたが、念のため公開しません。
+The vocabulary has been extracted directly from Wordle, but I will not disclose it just in case.
 
 ## Best words for start TOP 30
 
@@ -49,3 +49,20 @@ https://xcloche.hateblo.jp/entry/2022/01/24/212558
 |mares|5.951777451541269|
 |reans|5.950810301312467|
 |aloes|5.9447087524871405|
+
+## Best pokemons for start POKEMON WORDLE
+
+https://wordle.mega-yadoran.jp/
+
+|ポケモン|エントロピー|
+|-|-|
+|ジーランス|3.833357807876867|
+|ネンドール|3.8055146262573065|
+|ランクルス|3.765614591060905|
+|ルナトーン|3.7110582164124875|
+|ムーランド|3.6886931751565712|
+|グラードン|3.684719044565323|
+|レントラー|3.6519727405726994|
+|ドータクン|3.6197563396616097|
+|エルフーン|3.6052426653523555|
+|ヒードラン|3.572299697169144|
