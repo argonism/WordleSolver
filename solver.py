@@ -11,6 +11,18 @@ from tqdm import tqdm
 #
 #
 
+def to_pattern(query, answer):
+    condition = ["0"] * len(query)
+    already_mentioned = set()
+    for i, char in enumerate(query):
+        if len(answer) > i and char == answer[i]:
+            condition[i] = "2"
+            already_mentioned.add(char)
+        if char in answer and not (char in already_mentioned):
+            condition[i] = "1"
+            already_mentioned.add(char)
+    return tuple(condition)
+
 class WordleSolver(object):
     def __init__(self, dict_path):
         self.dict_path = dict_path
@@ -43,26 +55,14 @@ class WordleSolver(object):
                 if query[i] in word and not query[i] in already_mentioned:
                     return False
             if cond == "1":
-                if query[i] == word[i] or not (query[i] in word):
+                if (len(word) > i and query[i] == word[i]) or not (query[i] in word):
                     return False
                 else: already_mentioned.add(query[i])
             if cond == "2":
-                if not query[i] == word[i]:
+                if  len(word) > i and not query[i] == word[i]:
                     return False
                 else: already_mentioned.add(query[i])
         return True
-
-    def to_pattern(self, query, answer):
-        condition = ["0"] * 5
-        already_mentioned = set()
-        for i, char in enumerate(query):
-            if char == answer[i]:
-                condition[i] = "2"
-                already_mentioned.add(char)
-            if char in answer and not (char in already_mentioned):
-                condition[i] = "1"
-                already_mentioned.add(char)
-        return tuple(condition)
 
     def calc_entropy(self, query):
         sum_entropy = 0.0
@@ -71,7 +71,7 @@ class WordleSolver(object):
         pattern_count = defaultdict(int)
         # answerが答えであった時の色のパターンを考える
         for answer in self.vocab:
-            pattern = self.to_pattern(query, answer)
+            pattern = to_pattern(query, answer)
             pattern_count[pattern] += 1
         entropy = sum([-(count / vocab_size) * math.log2(count / vocab_size) for count in pattern_count.values()])
 

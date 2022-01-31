@@ -1,5 +1,5 @@
 import random
-from solver import WordleSolver
+from solver import WordleSolver, to_pattern
 from enum import Enum, auto
 from tqdm import tqdm
 
@@ -24,7 +24,7 @@ class WordleSimulator(object):
         query = initial_query
         while not self.state == GameState.END:
             self.step += 1
-            cue = self.to_pattern(query, self.answer)
+            cue = to_pattern(query, self.answer)
             if cue == ("2", "2", "2", "2", "2"):
                 step = self.step
                 self.reset_game_state()
@@ -39,17 +39,6 @@ class WordleSimulator(object):
             solver.reset()
         print(f"average step: {sum(steps)/len(steps)}")
 
-    def to_pattern(self, query, answer):
-        condition = ["0"] * 5
-        already_mentioned = set()
-        for i, char in enumerate(query):
-            if char == answer[i]:
-                condition[i] = "2"
-                already_mentioned.add(char)
-            if char in answer and not (char in already_mentioned):
-                condition[i] = "1"
-                already_mentioned.add(char)
-        return tuple(condition)
 
 def load_answers(path):
     vocab = []
