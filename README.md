@@ -1,3 +1,6 @@
+# Update history
+2022/1/31 Update for [POKEMON WORDLE](https://wordle.mega-yadoran.jp/)
+
 # Wordle Solver
 
 This is a solver of wordle.
