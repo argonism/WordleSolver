@@ -5,7 +5,7 @@
 
 This is a solver of wordle.
 
-It solves with in average 3.9 attemps.
+I tested this solver in virtual wordle game, and it solves within 3.9 attemps in average.
 
 The word with the highest entropy is selected each guess.
 
